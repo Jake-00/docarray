@@ -4,10 +4,12 @@ import numpy as np
 from pydantic.generics import GenericModel
 
 from docarray.base_document import BaseDocument
-from docarray.typing import AnyEmbedding, AudioUrl
+from docarray.typing import AudioUrl
 from docarray.typing.bytes.audio_bytes import AudioBytes
 from docarray.typing.tensor.abstract_tensor import AbstractTensor
+from docarray.typing.tensor.abstract_tensor import T as TensorT
 from docarray.typing.tensor.audio.audio_tensor import AudioTensor
+from docarray.typing.tensor.embedding import EmbeddingTensor
 from docarray.utils.misc import is_tf_available, is_torch_available
 
 torch_available = is_torch_available()
@@ -20,16 +22,14 @@ if tf_available:
 
 
 T = TypeVar('T', bound='Audio')
-EmbeddingT = TypeVar('EmbeddingT', bound=AnyEmbedding)
-AudioTensorT = TypeVar('AudioTensorT', bound=AudioTensor)
 
 
-class Audio(BaseDocument, GenericModel, Generic[AudioTensorT, EmbeddingT]):
+class Audio(BaseDocument, GenericModel, Generic[TensorT]):
     """
     Document for handling audios.
 
     The Audio Document can contain an AudioUrl (`Audio.url`), an AudioTensor
-    (`Audio.tensor`), and an AnyEmbedding (`Audio.embedding`).
+    (`Audio.tensor`), and an EmbeddingTensor (`Audio.embedding`).
 
     EXAMPLE USAGE:
 
@@ -100,8 +100,8 @@ class Audio(BaseDocument, GenericModel, Generic[AudioTensorT, EmbeddingT]):
     """
 
     url: Optional[AudioUrl]
-    tensor: Optional[AudioTensorT]
-    embedding: Optional[EmbeddingT]
+    tensor: Optional[AudioTensor[TensorT]]
+    embedding: Optional[EmbeddingTensor[TensorT]]
     bytes: Optional[AudioBytes]
 
     @classmethod
