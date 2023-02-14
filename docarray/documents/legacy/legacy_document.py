@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Optional
 
 from docarray import BaseDocument, DocumentArray
-from docarray.typing import AnyEmbedding, AnyTensor
+from docarray.typing import AnyTensor, EmbeddingTensor
 
 
 class LegacyDocument(BaseDocument):
@@ -39,6 +39,6 @@ class LegacyDocument(BaseDocument):
     blob: Optional[bytes]
     text: Optional[str]
     url: Optional[str]
-    embedding: Optional[AnyEmbedding]
+    embedding: Optional[EmbeddingTensor]
     tags: Dict[str, Any] = dict()
     scores: Optional[Dict[str, Any]]

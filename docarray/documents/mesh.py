@@ -3,10 +3,10 @@ from typing import Any, Generic, Optional, Type, TypeVar, Union
 from pydantic.generics import GenericModel
 
 from docarray.base_document import BaseDocument
-from docarray.typing import AnyEmbedding, AnyTensor, Mesh3DUrl
+from docarray.typing import AnyTensor, EmbeddingTensor, Mesh3DUrl
 
 T = TypeVar('T', bound='Mesh3D')
-EmbeddingT = TypeVar('EmbeddingT', bound=AnyEmbedding)
+EmbeddingT = TypeVar('EmbeddingT', bound=EmbeddingTensor)
 TensorT = TypeVar('TensorT', bound=AnyTensor)
 
 
@@ -23,7 +23,7 @@ class Mesh3D(BaseDocument, GenericModel, Generic[TensorT, EmbeddingT]):
 
     The Mesh3D Document can contain an Mesh3DUrl (`Mesh3D.url`), an AnyTensor of
     vertices (`Mesh3D.vertices`), an AnyTensor of faces (`Mesh3D.faces`) and an
-    AnyEmbedding (`Mesh3D.embedding`).
+    EmbeddingTensor (`Mesh3D.embedding`).
 
     EXAMPLE USAGE:
 
@@ -44,7 +44,7 @@ class Mesh3D(BaseDocument, GenericModel, Generic[TensorT, EmbeddingT]):
     .. code-block:: python
 
         from docarray.documents import Mesh3D
-        from docarray.typing import AnyEmbedding
+        from docarray.typing import EmbeddingTensor
         from typing import Optional
 
 

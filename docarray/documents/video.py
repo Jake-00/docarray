@@ -5,7 +5,7 @@ from pydantic.generics import GenericModel
 
 from docarray.base_document import BaseDocument
 from docarray.documents import Audio
-from docarray.typing import AnyEmbedding, AnyTensor
+from docarray.typing import AnyTensor, EmbeddingTensor
 from docarray.typing.tensor.abstract_tensor import AbstractTensor
 from docarray.typing.tensor.audio.audio_tensor import AudioTensor
 from docarray.typing.tensor.video.video_tensor import VideoTensor
@@ -24,7 +24,7 @@ if tf_available:
 
 T = TypeVar('T', bound='Video')
 VideoTensorT = TypeVar('VideoTensorT', bound=VideoTensor)
-EmbeddingT = TypeVar('EmbeddingT', bound=AnyEmbedding)
+EmbeddingT = TypeVar('EmbeddingT', bound=EmbeddingTensor)
 TensorT = TypeVar('TensorT', bound=AnyTensor)
 AudioTensorT = TypeVar('AudioTensorT', bound=AudioTensor)
 
@@ -37,7 +37,7 @@ class Video(
     The Video Document can contain a VideoUrl (`Video.url`), an Audio Document
     (`Video.audio`), a VideoTensor (`Video.tensor`), an AnyTensor representing
     the indices of the video's key frames (`Video.key_frame_indices`) and an
-    AnyEmbedding (`Video.embedding`).
+    EmbeddingTensor (`Video.embedding`).
 
     EXAMPLE USAGE:
 

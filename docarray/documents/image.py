@@ -4,14 +4,14 @@ import numpy as np
 from pydantic.generics import GenericModel
 
 from docarray.base_document import BaseDocument
-from docarray.typing import AnyEmbedding, ImageBytes, ImageUrl
+from docarray.typing import EmbeddingTensor, ImageBytes, ImageUrl
 from docarray.typing.tensor.abstract_tensor import AbstractTensor
 from docarray.typing.tensor.image.image_tensor import ImageTensor
 from docarray.utils.misc import is_tf_available, is_torch_available
 
 T = TypeVar('T', bound='Image')
 ImageTensorT = TypeVar('ImageTensorT', bound=ImageTensor)
-EmbeddingT = TypeVar('EmbeddingT', bound=AnyEmbedding)
+EmbeddingT = TypeVar('EmbeddingT', bound=EmbeddingTensor)
 
 torch_available = is_torch_available()
 if torch_available:
@@ -26,7 +26,7 @@ class Image(BaseDocument, GenericModel, Generic[ImageTensorT, EmbeddingT]):
     """
     Document for handling images.
     It can contain an ImageUrl (`Image.url`), an AnyTensor (`Image.tensor`),
-    and an AnyEmbedding (`Image.embedding`).
+    and an EmbeddingTensor (`Image.embedding`).
 
     EXAMPLE USAGE:
 
@@ -47,13 +47,13 @@ class Image(BaseDocument, GenericModel, Generic[ImageTensorT, EmbeddingT]):
     .. code-block:: python
 
         from docarray.documents import Image
-        from docarray.typing import AnyEmbedding
+        from docarray.typing import EmbeddingTensor
         from typing import Optional
 
 
         # extend it
         class MyImage(Image):
-            second_embedding: Optional[AnyEmbedding]
+            second_embedding: Optional[EmbeddingTensor]
 
 
         image = MyImage(url='http://www.jina.ai/image.jpg')

@@ -1,7 +1,7 @@
-from docarray.typing.tensor.embedding.embedding import AnyEmbedding
+from docarray.typing.tensor.embedding.embedding import EmbeddingTensor
 from docarray.typing.tensor.embedding.ndarray import NdArrayEmbedding
 
-__all__ = ['NdArrayEmbedding', 'AnyEmbedding']
+__all__ = ['NdArrayEmbedding', 'EmbeddingTensor']
 
 from docarray.utils.misc import is_tf_available, is_torch_available
 

@@ -4,7 +4,7 @@ import numpy as np
 from pydantic.generics import GenericModel
 
 from docarray.base_document import BaseDocument
-from docarray.typing import AnyEmbedding, AnyTensor, PointCloud3DUrl
+from docarray.typing import AnyTensor, EmbeddingTensor, PointCloud3DUrl
 from docarray.typing.tensor.abstract_tensor import AbstractTensor
 from docarray.utils.misc import is_tf_available, is_torch_available
 
@@ -18,7 +18,7 @@ if tf_available:
 
 T = TypeVar('T', bound='PointCloud3D')
 TensorT = TypeVar('TensorT', bound=AnyTensor)
-EmbeddingT = TypeVar('EmbeddingT', bound=AnyEmbedding)
+EmbeddingT = TypeVar('EmbeddingT', bound=EmbeddingTensor)
 
 
 class PointCloud3D(BaseDocument, GenericModel, Generic[TensorT, EmbeddingT]):
@@ -31,7 +31,8 @@ class PointCloud3D(BaseDocument, GenericModel, Generic[TensorT, EmbeddingT]):
     hence easier for deep learning algorithms to handle.
 
     A PointCloud3D Document can contain an PointCloud3DUrl (`PointCloud3D.url`), an
-    AnyTensor (`PointCloud3D.tensor`), and an AnyEmbedding (`PointCloud3D.embedding`).
+    AnyTensor (`PointCloud3D.tensor`), and an EmbeddingTensor (`PointCloud3D.embedding`)
+    .
 
     EXAMPLE USAGE:
 
@@ -52,13 +53,13 @@ class PointCloud3D(BaseDocument, GenericModel, Generic[TensorT, EmbeddingT]):
     .. code-block:: python
 
         from docarray.documents import PointCloud3D
-        from docarray.typing import AnyEmbedding
+        from docarray.typing import EmbeddingTensor
         from typing import Optional
 
 
         # extend it
         class MyPointCloud3D(PointCloud3D):
-            second_embedding: Optional[AnyEmbedding]
+            second_embedding: Optional[EmbeddingTensor]
 
 
         pc = MyPointCloud3D(url='https://people.sc.fsu.edu/~jburkardt/data/obj/al.obj')

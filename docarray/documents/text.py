@@ -4,17 +4,17 @@ from pydantic.generics import GenericModel
 
 from docarray.base_document import BaseDocument
 from docarray.typing import TextUrl
-from docarray.typing.tensor.embedding import AnyEmbedding
+from docarray.typing.tensor.embedding import EmbeddingTensor
 
 T = TypeVar('T', bound='Text')
-EmbeddingT = TypeVar('EmbeddingT', bound=AnyEmbedding)
+EmbeddingT = TypeVar('EmbeddingT', bound=EmbeddingTensor)
 
 
 class Text(BaseDocument, GenericModel, Generic[EmbeddingT]):
     """
     Document for handling text.
     It can contain a TextUrl (`Text.url`), a str (`Text.text`),
-    and an AnyEmbedding (`Text.embedding`).
+    and an EmbeddingTensor (`Text.embedding`).
 
     EXAMPLE USAGE:
 
@@ -43,13 +43,13 @@ class Text(BaseDocument, GenericModel, Generic[EmbeddingT]):
     .. code-block:: python
 
         from docarray.documents import Text
-        from docarray.typing import AnyEmbedding
+        from docarray.typing import EmbeddingTensor
         from typing import Optional
 
 
         # extend it
         class MyText(Text):
-            second_embedding: Optional[AnyEmbedding]
+            second_embedding: Optional[EmbeddingTensor]
 
 
         txt_doc = MyText(url='http://www.jina.ai/')

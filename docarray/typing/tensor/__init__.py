@@ -1,4 +1,4 @@
-from docarray.typing.tensor.embedding import AnyEmbedding, NdArrayEmbedding
+from docarray.typing.tensor.embedding import EmbeddingTensor, NdArrayEmbedding
 from docarray.typing.tensor.image import ImageNdArray, ImageTensor
 from docarray.typing.tensor.ndarray import NdArray
 from docarray.typing.tensor.tensor import AnyTensor
@@ -6,7 +6,7 @@ from docarray.typing.tensor.tensor import AnyTensor
 __all__ = [
     'NdArray',
     'AnyTensor',
-    'AnyEmbedding',
+    'EmbeddingTensor',
     'NdArrayEmbedding',
     'ImageNdArray',
     'ImageTensor',

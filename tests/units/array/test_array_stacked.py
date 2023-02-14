@@ -8,8 +8,8 @@ from docarray import BaseDocument, DocumentArray
 from docarray.array import DocumentArrayStacked
 from docarray.documents import Image as AbstractImage
 from docarray.typing import (
-    AnyEmbedding,
     AnyTensor,
+    EmbeddingTensor,
     ImageNdArray,
     ImageTorchTensor,
     NdArray,
@@ -307,7 +307,7 @@ def test_get_from_slice_stacked():
 
 def test_stack_embedding():
     class MyDoc(BaseDocument):
-        embedding: AnyEmbedding
+        embedding: EmbeddingTensor
 
     da = DocumentArray[MyDoc](
         [MyDoc(embedding=np.zeros(10)) for _ in range(10)]
