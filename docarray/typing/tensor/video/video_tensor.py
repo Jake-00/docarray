@@ -26,6 +26,7 @@ if is_tf_available():
     _VIDEO_TENSOR[TensorFlowTensor] = VideoTFTensor
 
 
-class VideoTensor(Generic[T]):
-    def __class_getitem__(self, item: Type[AbstractTensor]) -> Type[VideoTensorMixin]:
+class VideoTensor(VideoNdArray, Generic[T]):
+    @classmethod
+    def __class_getitem__(cls, item: Type[AbstractTensor]) -> Type[VideoTensorMixin]:
         return _VIDEO_TENSOR[item]

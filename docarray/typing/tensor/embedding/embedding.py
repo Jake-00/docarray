@@ -26,6 +26,10 @@ if is_tf_available():
     _EMBEDDING_TENSOR[TensorFlowTensor] = TFEmbedding
 
 
-class EmbeddingTensor(Generic[T]):
-    def __class_getitem__(self, item: Type[AbstractTensor]) -> Type[EmbeddingMixin]:
-        return _EMBEDDING_TENSOR[item]
+class EmbeddingTensor(NdArrayEmbedding, Generic[T]):
+    @classmethod
+    def __class_getitem__(cls, item: Type[AbstractTensor]) -> Type[EmbeddingMixin]:
+        try:
+            return _EMBEDDING_TENSOR[item]
+        except Exception:
+            return TorchEmbedding

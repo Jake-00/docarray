@@ -25,8 +25,10 @@ if is_tf_available():
     _AUDIO_TENSOR[TensorFlowTensor] = AudioTFTensor
 
 
-class AudioTensor(AbstractAudioTensor, Generic[T]):
-    def __class_getitem__(
-        self, item: Type[AbstractTensor]
-    ) -> Type[AbstractAudioTensor]:
-        return _AUDIO_TENSOR[item]
+class AudioTensor(AudioNdArray, Generic[T]):
+    @classmethod
+    def __class_getitem__(cls, item: Type[AbstractTensor]) -> Type[AbstractAudioTensor]:
+        try:
+            return _AUDIO_TENSOR[item]
+        except Exception:
+            return AudioTorchTensor

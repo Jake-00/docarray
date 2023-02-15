@@ -5,9 +5,9 @@ import torch
 from docarray import BaseDocument, DocumentArray
 from docarray.documents import Image, Text
 from docarray.typing import (
-    AnyEmbedding,
     AnyTensor,
     AnyUrl,
+    EmbeddingTensor,
     ImageBytes,
     ImageUrl,
     Mesh3DUrl,
@@ -58,7 +58,7 @@ def test_all_types():
         np_array_param: NdArray[224, 224, 3]
         generic_nd_array: AnyTensor
         generic_torch_tensor: AnyTensor
-        embedding: AnyEmbedding
+        embedding: EmbeddingTensor
         torch_embedding: TorchEmbedding[128]
         np_embedding: NdArrayEmbedding[128]
         nested_docs: DocumentArray[NestedDoc]
@@ -133,7 +133,7 @@ def test_tensorflow_types():
         tf_tensor: TensorFlowTensor
         tf_tensor_param: TensorFlowTensor[224, 224, 3]
         generic_tf_tensor: AnyTensor
-        embedding: AnyEmbedding
+        embedding: EmbeddingTensor
         tf_embedding: TensorFlowEmbedding[128]
         nested_docs: DocumentArray[NestedDoc]
 

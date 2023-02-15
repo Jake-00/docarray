@@ -27,8 +27,7 @@ if tf_available:
     _IMAGE_TENSOR[TensorFlowTensor] = ImageTFTensor
 
 
-class ImageTensor(Generic[T]):
-    def __class_getitem__(
-        self, item: Type[AbstractTensor]
-    ) -> Type[AbstractImageTensor]:
+class ImageTensor(ImageNdArray, Generic[T]):
+    @classmethod
+    def __class_getitem__(cls, item: Type[AbstractTensor]) -> Type[AbstractImageTensor]:
         return _IMAGE_TENSOR[item]
