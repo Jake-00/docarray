@@ -498,7 +498,7 @@ class DocumentArray(AnyDocumentArray, Generic[T_doc]):
         _show_progress: bool = False,
     ) -> None:
         if protocol in ('protobuf-array', 'pickle-array'):
-            compress_ctx = _get_compress_ctx(compress, mode='wb')
+            compress_ctx = _get_compress_ctx(compress)
         else:
             # delegate the compression to per-doc compression
             compress_ctx = None
